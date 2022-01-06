@@ -21,6 +21,14 @@ public interface Dao<T, K> {
     default List<T> getAll() {
         throw new UnsupportedOperationException();
     }
+    /**
+     * gets all datasets in a table
+     * @param k condition
+     * @return list of model-objects with specified condition
+     */
+    default List<T> getAll(K k) {
+        throw new UnsupportedOperationException();
+    }
 
     /**
      * gets a single datasets in a table

@@ -5,10 +5,7 @@ import ch.bzz.roomManagement.data.Dao;
 import ch.bzz.roomManagement.data.RoomDao;
 import ch.bzz.roomManagement.model.Room;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -37,6 +34,23 @@ public class RoomService {
         int httpStatus = 200;
         Dao<Room, String> roomDao = new RoomDao();
         List<Room> roomList = roomDao.getAll();
+        if (roomList.isEmpty())
+            httpStatus = 404;
+
+        return Response
+                .status(httpStatus)
+                .entity(roomList)
+                .build();
+    }
+
+    @GET
+    @Path("list/{type}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listRooms(@PathParam("type") String type) {
+
+        int httpStatus = 200;
+        Dao<Room, String> roomDao = new RoomDao();
+        List<Room> roomList = roomDao.getAll(type);
         if (roomList.isEmpty())
             httpStatus = 404;
 
