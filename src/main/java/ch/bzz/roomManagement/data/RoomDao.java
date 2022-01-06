@@ -3,6 +3,7 @@ package ch.bzz.roomManagement.data;
 
 
 import ch.bzz.roomManagement.model.Room;
+import ch.bzz.roomManagement.service.Config;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,8 +30,7 @@ public class RoomDao implements Dao<Room, String> {
     @Override
     public List<Room> getAll() {
         List<Room> roomList = new ArrayList<>();
-        String sqlQuery =
-                "SELECT * FROM Room";
+        String sqlQuery = Config.getProperty("roomListQuery");
         try {
             ResultSet resultSet = MySqlDB.sqlSelect(sqlQuery);
             while (resultSet.next()) {
@@ -59,8 +59,7 @@ public class RoomDao implements Dao<Room, String> {
     public Room getEntity(String roomId) {
         Room room = new Room();
 
-        String sqlQuery =
-                "SELECT * FROM Room WHERE roomId=?";
+        String sqlQuery = Config.getProperty("roomIdQuery");
         Map<Integer, String> values = new HashMap<>();
         values.put(1, roomId);
         try {
@@ -92,8 +91,9 @@ public class RoomDao implements Dao<Room, String> {
         room.setName(resultSet.getString("name"));
         room.setDescription(resultSet.getString("description"));
         room.setType(resultSet.getString("type"));
-        room.setPrice(resultSet.getFloat("price"));
-        room.setArea(resultSet.getFloat("area"));
+        room.setPrice(resultSet.getString("price"));
+        room.setArea(resultSet.getString("area"));
+       // resultSet.get
     }
 
 }

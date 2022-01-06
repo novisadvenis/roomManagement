@@ -20,10 +20,10 @@ public class Room {
     private String type;
 
     @FormParam("price")
-    private float price;
+    private String price;
 
     @FormParam("area")
-    private float area;
+    private String area;
 
 
     public Integer getRoomId() {
@@ -58,19 +58,19 @@ public class Room {
         this.type = type;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public float getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(float area) {
+    public void setArea(String area) {
         this.area = area;
     }
 }

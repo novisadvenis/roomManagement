@@ -20,7 +20,7 @@ import java.util.Set;
 @ApplicationPath("/resource")
 
 public class Config extends Application {
-    private static final String PROPERTIES_PATH = "/home/bzz/webapp/roomManagement.properties";
+    private static final String PROPERTIES_PATH = Config.class.getClassLoader().getResource("roomManagement.properties").getPath();
     private static Properties properties = null;
 
     /**
@@ -31,7 +31,7 @@ public class Config extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         HashSet providers = new HashSet<Class<?>>();
-        // providers.add(RoomService.class);
+        providers.add(RoomService.class);
         providers.add(ReservationService.class);
         // providers.add(EventService.class);
         return providers;
