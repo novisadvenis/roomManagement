@@ -7,7 +7,7 @@
     <groupId>com.roomManagement</groupId>
     <artifactId>roomManagement</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>roomManagementD</name>
+    <name>roomManagement</name>
     <packaging>war</packaging>
 
     <properties>
