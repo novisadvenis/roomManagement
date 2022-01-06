@@ -49,6 +49,32 @@ public class RoomDao implements Dao<Room, String> {
 
     }
 
+    @Override
+    public List<Room> getAll(String condition) {
+        List<Room> roomList = new ArrayList<>();
+        String sqlQuery = Config.getProperty("roomListTypeQuery");
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1,condition);
+        try {
+            ResultSet resultSet = MySqlDB.sqlSelect(sqlQuery, map);
+            while (resultSet.next()) {
+                Room room = new Room();
+                setValues(resultSet, room);
+                roomList.add(room);
+            }
+        } catch (SQLException sqlEx) {
+            MySqlDB.printSQLException(sqlEx);
+            throw new RuntimeException();
+        } finally {
+
+            MySqlDB.sqlClose();
+        }
+        return roomList;
+
+    }
+
+
+
     /**
      * reads a room from the table "Room" identified by the roomId
      *
