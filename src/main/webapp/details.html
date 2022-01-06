@@ -16,15 +16,16 @@
                 <a class="nav-link" href="welcome.html">Home</a>
         </li>
         <li class="nav-item">
-                <a class="nav-link" href="raumauswahl.html">Raumauswahl</a>
+                <a class="nav-link" href="raumuebersicht.html">Raum Übersicht</a>
+        </li>
+        <li class="nav-item">
+            <a class=" nav-link" href="reservation.html">Reservation</a>
         </li>
         <li class="nav-item">
                 <a class="nav-link active" href="#">Details</a>
         </li>
     </div>
 </nav>
-<!-- HEADER -->
-
 <div class="wrapper">
     <div class="text-center">
         <h1>Detailansicht</h1>
@@ -108,5 +109,22 @@
         </footer>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        const queryString = window.location.search;
+        let urlParam = queryString.split("=")[1];
+        if(urlParam === undefined){
+            urlParam = "";
+        }
+        getData(urlParam);
+    });
+
+    async function getData(type) {
+        const data = await fetch("http://localhost:8080/roomManagement-1.0-SNAPSHOT/resource/room/list/"+type, {
+            method: 'GET'
+        }).then(res=>res.json());
+        console.log("response data:", data);
+    }
+</script>
 </body>
 </html>
