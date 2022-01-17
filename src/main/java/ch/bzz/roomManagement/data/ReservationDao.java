@@ -102,13 +102,38 @@ public class ReservationDao implements Dao<Reservation, String> {
                 " start=?," +
                 " end=?," +
                 " Room_roomId=?," +
-                " Event_eventId=?,";
+                " Event_eventId=?";
 
         values.put(1, reservation.getReservationId().toString());
         values.put(2, reservation.getStart().toString());
         values.put(3, reservation.getEnd().toString());
         values.put(4, reservation.getRoom().getRoomId().toString());
         values.put(5, reservation.getEvent().getEventId().toString());
+
+        try {
+            return MySqlDB.sqlUpdate(sqlQuery, values);
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public Result update(Reservation reservation) {
+        Map<Integer, String> values = new HashMap<>();
+        String sqlQuery;
+        sqlQuery = "UPDATE Reservation";
+        sqlQuery += " SET  start=?," +
+                " end=?," +
+                " Room_roomId=?," +
+                " Event_eventId=?";
+        sqlQuery += " WHERE reservationId=?";
+
+        values.put(1, reservation.getStart().toString());
+        values.put(2, reservation.getEnd().toString());
+        values.put(3, reservation.getRoom().getRoomId().toString());
+        values.put(4, reservation.getEvent().getEventId().toString());
+        values.put(5, reservation.getReservationId().toString());
 
         try {
             return MySqlDB.sqlUpdate(sqlQuery, values);
