@@ -48,6 +48,14 @@ public interface Dao<T, K> {
         throw new UnsupportedOperationException();
     }
 
+
+    /**
+     * updates an object in the database
+     * @param t model-object
+     * @return Result-code
+     */
+    default Result update(T t) { throw new UnsupportedOperationException(); }
+
     /**
      * delets an entity in the database
      * @param k primary key
