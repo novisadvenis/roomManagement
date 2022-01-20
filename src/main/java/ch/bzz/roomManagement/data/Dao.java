@@ -39,6 +39,10 @@ public interface Dao<T, K> {
         throw new UnsupportedOperationException();
     }
 
+    default T getEntity(K k, K l) {
+        throw new UnsupportedOperationException();
+    }
+
     /**
      * saves an object to the database entity
      * @param t model-object
