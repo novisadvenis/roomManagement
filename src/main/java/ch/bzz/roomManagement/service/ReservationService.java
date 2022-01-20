@@ -113,4 +113,13 @@ public class ReservationService {
                 .entity("")
                 .build();
     }
+
+    @PATCH
+    @Path("patch")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response updateReservation() {
+        //todo patch api
+        return null;
+    }
+
 }
