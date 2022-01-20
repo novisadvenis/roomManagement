@@ -13,7 +13,6 @@ public class UserDao implements Dao<User,String> {
     public User getEntity(String username, String password) {
         //todo
         //need password hashing and only userId parameter is not enough
-        :
         return null;
     }
 
