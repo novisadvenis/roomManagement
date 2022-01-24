@@ -13,11 +13,12 @@ public class UserDao implements Dao<User, String> {
     public User getEntity(String username, String password) {
         User user = new User();
 
-        String sqlQuery ="SELECT * FROM User WHERE userId=?";
+        String sqlQuery = Config.getProperty("userQuery");
 
         // TODO Tenzin: implementation überprüfen
         Map<Integer, String> values = new HashMap<>();
-        values.put(1, username + password);
+        values.put(1, username);
+        values.put(2, password);
 
         try {
             ResultSet resultSet = MySqlDB.sqlSelect(sqlQuery, values);
