@@ -113,4 +113,27 @@ public class ReservationService {
                 .entity("")
                 .build();
     }
+
+    @PATCH
+    @Path("patch")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response updateReservation(
+            @QueryParam("reservationId") String reservationId
+    ) {
+        int httpStatus = 200;
+
+        Dao<Reservation, String> reservationDao = new ReservationDao();
+        Reservation reservationOld = reservationDao.getEntity(reservationId);
+
+        if (reservationOld.getStart() !=  null) {
+            httpStatus = 200;
+
+            reservationDao.update(reservationOld);
+        }
+
+
+        //TODO Tenzin: implementation überprüfen
+        return null;
+    }
+
 }

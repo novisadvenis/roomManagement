@@ -39,6 +39,10 @@ public interface Dao<T, K> {
         throw new UnsupportedOperationException();
     }
 
+    default T getEntity(K k, K l) {
+        throw new UnsupportedOperationException();
+    }
+
     /**
      * saves an object to the database entity
      * @param t model-object
@@ -47,6 +51,14 @@ public interface Dao<T, K> {
     default Result save (T t) {
         throw new UnsupportedOperationException();
     }
+
+
+    /**
+     * updates an object in the database
+     * @param t model-object
+     * @return Result-code
+     */
+    default Result update(T t) { throw new UnsupportedOperationException(); }
 
     /**
      * delets an entity in the database
