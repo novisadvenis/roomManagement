@@ -35,11 +35,59 @@
     </style>
 </head>
 <body>
+
+<nav class="navbar sticky-top navbar-dark bg-dark">
+    <!-- Navbar content -->
+    <div class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="welcome.html">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="raumuebersicht.html">Raum Übersicht</a>
+        </li>
+        <li class="nav-item">
+            <a class=" nav-link  active" href="#">Reservation</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="details.html">Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="reservationsanfrage.html">Anfrage</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="AGB.html">AGBs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="login.html">logout</a>
+        </li>
+    </div>
+</nav>
 <div class="text-center">
     <h1>Raum reservieren</h1>
 </div>
 <form action="" method="get" class="form">
-    <b>- TODO: HIER ROOM PICKER -</b>
+    <input type="date" id="datePicker">
+    <input type="time" id="timePicker">
+    <select id="roomTypePicker">
+        <option value="Sitzungsraum">Sitzungsraum/Schulungsraum</option>
+        <option value="Turnhalle">Turnhalle</option>
+        <option value="Kueche">Küche</option>
+    </select>
+    <button type="button" onclick="showRoomPicker()">Räume finden</button>
+    <br>
+    <select id="roomPickerSitzung" hidden="true">
+        <option value="Room1">Sitzungsraum 1</option>
+        <option value="Room3">Sitzungsraum 3</option>
+        <option value="Room4">Sitzungsraum 4</option>
+        <option value="Room6">Sitzungsraum 6</option>
+    </select>
+    <select id="roomPickerTurnhalle" hidden="true">
+        <option value="Turnhalle2">Turnhalle 2</option>
+        <option value="Turnhalle3">Turnhalle 3</option>
+    </select>
+    <select id="roomPickerKueche" hidden="true">
+        <option value="Kueche">Küche</option>
+    </select>
     <br>
     <label for="event"><b>Event: </b></label>
     <input type="text" placeholder="Event... (z.B. Hallenturnier)" id="event" required>
@@ -66,6 +114,23 @@
     <button type="submit" id="submit" onclick="sendEmail()">Absenden</button>
 </form>
 <script>
+    function showRoomPicker() {
+        let raumTyp = document.getElementById("roomTypePicker").value;
+        if (raumTyp === "Sitzungsraum") {
+            document.getElementById("roomPickerSitzung").hidden = false;
+            document.getElementById("roomPickerKueche").hidden = true;
+            document.getElementById("roomPickerTurnhalle").hidden = true;
+        } else if (raumTyp === "Turnhalle") {
+            document.getElementById("roomPickerSitzung").hidden = true;
+            document.getElementById("roomPickerKueche").hidden = true;
+            document.getElementById("roomPickerTurnhalle").hidden = false;
+        } else if (raumTyp === "Kueche") {
+            document.getElementById("roomPickerSitzung").hidden = true;
+            document.getElementById("roomPickerKueche").hidden = false;
+            document.getElementById("roomPickerTurnhalle").hidden = true;
+        }
+    }
+
     function sendEmail() {
         let event = document.getElementById("event").value;
         let name = document.getElementById("name").value;
@@ -74,7 +139,7 @@
         let start = document.getElementById("start").value;
         let zeitraum = document.getElementById("zeitraum").value;
         let body = "Guten Tag " + name + ",\nVielen Dank für deine Reservation!\nEvent: " + event
-        + "\nTelefon: " + telefon + "Zeitpunkt: " + start + ", " + zeitraum + "\n\nBei weiteren Fragen bitte kontaktieren Sie uns!\nIhr RoomManagement Team"
+            + "\nTelefon: " + telefon + "Zeitpunkt: " + start + ", " + zeitraum + "\n\nBei weiteren Fragen bitte kontaktieren Sie uns!\nIhr RoomManagement Team"
 
         Email.send({
             Host: "smtp.gmail.com",
