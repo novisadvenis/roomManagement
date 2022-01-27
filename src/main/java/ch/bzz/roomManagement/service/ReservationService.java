@@ -77,9 +77,11 @@ public class ReservationService {
             @BeanParam Reservation reservation,
             @BeanParam Room room,
             @BeanParam Event event
+            //@CookieParam("token") String token
     ) {
         int httpStatus;
         String message;
+
         reservation.setReservationId(reservationId);
         reservation.setEvent(event);
         reservation.setRoom(room);
@@ -118,22 +120,22 @@ public class ReservationService {
     @Path("patch")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateReservation(
-            @QueryParam("reservationId") String reservationId
+            //@QueryParam("reservationId") String reservationId,
+            @BeanParam Reservation reservation
     ) {
         int httpStatus = 200;
 
         Dao<Reservation, String> reservationDao = new ReservationDao();
-        Reservation reservationOld = reservationDao.getEntity(reservationId);
 
-        if (reservationOld.getStart() !=  null) {
+        if (reservation.getStart() !=  null) {
             httpStatus = 200;
 
-            reservationDao.update(reservationOld);
+            reservationDao.update(reservation);
         }
-
-
-        //TODO Tenzin: implementation überprüfen
-        return null;
+        return Response
+                .status(httpStatus)
+                .entity("")
+                .build();
     }
 
 }
