@@ -46,13 +46,13 @@
             <a class="nav-link" href="raumuebersicht.html">Raum Übersicht</a>
         </li>
         <li class="nav-item">
-            <a class=" nav-link  active" href="#">Reservation</a>
+            <a class=" nav-link" href="#">Reservation</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="details.html">Details</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="reservationsanfrage.html">Anfrage</a>
+            <a class="nav-link" href="reservationsanfrage.html" active>Anfrage</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="AGB.html">AGBs</a>
@@ -107,8 +107,8 @@
     <br>
     <label for="zeitraum"><b>Zeitraum: </b></label>
     <select name="zeitraum" id="zeitraum" required>
-        <option value="halb">Halber Tag</option>
-        <option value="ganz">Ganzer Tag</option>
+        <option value="Halber Tag">Halber Tag</option>
+        <option value="Ganzer Tag">Ganzer Tag</option>
     </select>
     <br>
     <button type="submit" id="submit" onclick="sendEmail()">Absenden</button>
@@ -138,21 +138,20 @@
         let email = document.getElementById("email").value;
         let start = document.getElementById("start").value;
         let zeitraum = document.getElementById("zeitraum").value;
-        let body = "Guten Tag " + name + ",\nVielen Dank für deine Reservation!\nEvent: " + event
-            + "\nTelefon: " + telefon + "Zeitpunkt: " + start + ", " + zeitraum + "\n\nBei weiteren Fragen bitte kontaktieren Sie uns!\nIhr RoomManagement Team"
+        let body = "Guten Tag " + name + ",<br>Vielen Dank für Ihre Reservation!<br>Event: " + event
+            + "<br>Telefon: " + telefon + "<br>Zeitpunkt: " + start + ", " + zeitraum + "<br><br>Bei weiteren Fragen bitte kontaktieren Sie uns!<br>Ihr RoomManagement Team";
 
         Email.send({
             Host: "smtp.gmail.com",
-            Username: "sender@email_address.com",
-            Password: "Enter your password",
+            Username: "noe.development@gmail.com",
+            Password: "b77ITm0d",
             To: email,
             From: "info@roommanagement.com",
             Subject: "Raum reserviert!",
             Body: body,
-        })
-            .then(function (message) {
-                alert("Reservation erfolgreich!")
-            });
+        }).then(function (message) {
+            alert("Reservation erfolgreich!")
+        });
     }
 </script>
 </body>
