@@ -30,7 +30,7 @@ public class EventDao implements Dao<Event, String> {
     public List<Event> getAll() {
         List<Event> eventList = new ArrayList<>();
         String sqlQuery =
-                "SELECT * FROM Event";
+                "SELECT * FROM event";
         try {
             ResultSet resultSet = MySqlDB.sqlSelect(sqlQuery);
             while (resultSet.next()) {
@@ -60,7 +60,7 @@ public class EventDao implements Dao<Event, String> {
         Event event = new Event();
 
         String sqlQuery =
-                "SELECT * FROM Event WHERE eventId=?";
+                "SELECT * FROM event WHERE eventId=?";
         Map<Integer, String> values = new HashMap<>();
         values.put(1, eventId);
         try {

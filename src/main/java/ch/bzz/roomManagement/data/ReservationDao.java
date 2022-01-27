@@ -6,8 +6,10 @@ import ch.bzz.roomManagement.util.ReservationIdGenerator;
 import ch.bzz.roomManagement.util.Result;
 
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +34,7 @@ public class ReservationDao implements Dao<Reservation, String> {
     public List<Reservation> getAll() {
         List<Reservation> reservationList = new ArrayList<>();
         String sqlQuery =
-                "SELECT * FROM Reservation";
+                "SELECT * FROM reservation";
         try {
             ResultSet resultSet = MySqlDB.sqlSelect(sqlQuery);
             while (resultSet.next()) {
@@ -62,7 +64,7 @@ public class ReservationDao implements Dao<Reservation, String> {
         Reservation reservation = new Reservation();
 
         String sqlQuery =
-                "SELECT * FROM Reservation WHERE reservationId=?";
+                "SELECT * FROM reservation WHERE reservationId=?";
         Map<Integer, String> values = new HashMap<>();
         values.put(1, reservationId);
         try {
@@ -94,9 +96,9 @@ public class ReservationDao implements Dao<Reservation, String> {
         String sqlQuery;
         if (reservation.getReservationId() == null) {
             reservation.setReservationId(ReservationIdGenerator.generateRandomId());
-            sqlQuery = "INSERT INTO Reservation";
+            sqlQuery = "INSERT INTO reservation";
         } else {
-            sqlQuery = "REPLACE Reservation";
+            sqlQuery = "REPLACE reservation";
         }
         sqlQuery += " SET reservationId=?," +
                 " start=?," +
@@ -122,7 +124,7 @@ public class ReservationDao implements Dao<Reservation, String> {
     public Result update(Reservation reservation) {
         Map<Integer, String> values = new HashMap<>();
         String sqlQuery;
-        sqlQuery = "UPDATE Reservation";
+        sqlQuery = "UPDATE reservation";
         sqlQuery += " SET  start=?," +
                 " end=?," +
                 " Room_roomId=?," +
@@ -152,7 +154,7 @@ public class ReservationDao implements Dao<Reservation, String> {
     @Override
     public Result delete(String reservationId) {
         String sqlQuery =
-                "DELETE FROM Reservation" +
+                "DELETE FROM reservation" +
                         " WHERE reservationId=?";
         Map<Integer, String> values = new HashMap<>();
         values.put(1, reservationId);
